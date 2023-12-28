@@ -2,16 +2,22 @@ pipeline {
     agent any
 
     stages {
-        stage('checkout') {
+        stage('First') {
             steps {
-                checkout scmGit(branches: [[name: '*/main'], [name: '*/jerry'], [name: '*/ram'], [name: '*/suresh']], extensions: [], userRemoteConfigs: [[credentialsId: 'd70990d8-cc35-4ac6-be64-71426ed48650', url: 'https://github.com/Suresh1925/MergeConflict.git']])
+                echo "This is the first stage"
             }
         }
 
-        stage('Build') {
+        stage('Second') {
             steps {
-              bat 'MergeConflict Test.txt'
+              echo "This is the Second stage"
             }
-        }        
+        }
+
+        stage('Third') {
+            steps {
+                echo "This is the Third stage"
+            }
+        }
     }
 }
