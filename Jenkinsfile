@@ -2,44 +2,16 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('checkout') {
             steps {
-                // Checkout the source code from version control
-                checkout scm
+                checkout scmGit(branches: [[name: '*/main'], [name: '*/jerry'], [name: '*/ram'], [name: '*/suresh']], extensions: [], userRemoteConfigs: [[credentialsId: 'd70990d8-cc35-4ac6-be64-71426ed48650', url: 'https://github.com/Suresh1925/MergeConflict.git']])
             }
         }
 
         stage('Build') {
             steps {
-                // Build the Maven project
-                sh 'mvn clean install'
+              bat 'MergeConflict Test.txt'
             }
-        }
-
-        stage('Test') {
-            steps {
-                // Run tests
-                sh 'mvn test'
-            }
-        }
-
-        stage('Deploy') {
-            // This stage can be extended for deployment steps
-            steps {
-                // Example: Deploy to a server or push to a container registry
-                echo 'Deployment steps go here'
-            }
-        }
-    }
-
-    post {
-        success {
-            // This block runs when the pipeline is successful
-            echo 'Pipeline succeeded! Perform additional tasks if needed.'
-        }
-        failure {
-            // This block runs when the pipeline fails
-            echo 'Pipeline failed! Notify or take corrective actions.'
-        }
+        }        
     }
 }
