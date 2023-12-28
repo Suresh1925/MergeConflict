@@ -10,7 +10,7 @@ pipeline {
 
         stage('Build') {
             steps {
-              bat 'MergeConflict Test.txt'
+              bat 'Test.txt'
             }
         }        
     }
